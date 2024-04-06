@@ -1,4 +1,5 @@
 package com.homeworkssql.sqlhogwarts.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -13,7 +14,7 @@ public class Student {
     private int age;
     @JoinColumn(name = "faculty_id")
     @ManyToOne
-    @JsonIgnore
+    @JsonBackReference
     private Faculty faculty;
 
     public Student(Long id, String name, int age) {

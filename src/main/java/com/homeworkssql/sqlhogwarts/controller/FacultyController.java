@@ -1,11 +1,12 @@
 package com.homeworkssql.sqlhogwarts.controller;
 
 import com.homeworkssql.sqlhogwarts.model.Faculty;
+import com.homeworkssql.sqlhogwarts.model.Student;
 import com.homeworkssql.sqlhogwarts.service.FacultyService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/faculty")
@@ -46,5 +47,10 @@ public class FacultyController {
             return service.getAll();
         }
         return service.getByColorOrName(color, name);
+    }
+
+      @GetMapping("students")
+    public List<Student> getStudentFaculty(@RequestParam long facultyId) {
+        return service.get(facultyId).getStudents();
     }
 }
