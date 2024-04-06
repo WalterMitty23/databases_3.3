@@ -2,6 +2,7 @@ package com.homeworkssql.sqlhogwarts.controller;
 
 import com.homeworkssql.sqlhogwarts.model.Faculty;
 import com.homeworkssql.sqlhogwarts.service.FacultyService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -36,8 +37,14 @@ public class FacultyController {
         return service.update(faculty);
     }
 
-    @GetMapping("/byColor")
-    public Collection<Faculty> getByColor(@RequestParam String color) {
-        return service.getByColor(color);
+    @GetMapping("/byColorAndName")
+    public Collection<Faculty> getByColor(
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) String name) {
+
+        if (color == null && name == null) {
+            return service.getAll();
+        }
+        return service.getByColorOrName(color, name);
     }
 }

@@ -1,8 +1,6 @@
 package com.homeworkssql.sqlhogwarts.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -13,6 +11,10 @@ public class Student {
     private Long id;
     private String name;
     private int age;
+    @JoinColumn(name = "faculty_id")
+    @ManyToOne
+    @JsonIgnore
+    private Faculty faculty;
 
     public Student(Long id, String name, int age) {
         this.id = id;
@@ -44,6 +46,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     @Override
