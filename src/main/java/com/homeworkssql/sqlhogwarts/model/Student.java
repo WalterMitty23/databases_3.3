@@ -14,7 +14,6 @@ public class Student {
     private int age;
     @JoinColumn(name = "faculty_id")
     @ManyToOne
-    @JsonBackReference
     private Faculty faculty;
 
     public Student(Long id, String name, int age) {
