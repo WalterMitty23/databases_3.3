@@ -4,6 +4,8 @@ import com.homeworkssql.sqlhogwarts.model.Avatar;
 import com.homeworkssql.sqlhogwarts.repository.AvatarRepository;
 import com.homeworkssql.sqlhogwarts.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,5 +47,9 @@ public class AvatarService {
 
     public Avatar getById(Long id) {
         return avatarRepository.findById(id).orElse(null);
+    }
+
+    public Page<Avatar> findAll(Pageable pageable) {
+        return avatarRepository.findAll(pageable);
     }
 }

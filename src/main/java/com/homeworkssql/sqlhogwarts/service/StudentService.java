@@ -43,5 +43,17 @@ public class StudentService {
     }
     public Collection<Student> getAll() {
         return repository.findAll();
+
+    }
+    public int getCountOfStudents() {
+        return repository.countStudents();
+    }
+
+    public double getAverageAge() {
+        return repository.avgAge();
+    }
+
+    public Collection<Student> getLastFiveStudents() {
+        return repository.getLastFive();
     }
 }
