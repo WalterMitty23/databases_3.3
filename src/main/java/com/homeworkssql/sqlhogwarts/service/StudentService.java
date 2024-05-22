@@ -95,5 +95,56 @@ public class StudentService {
                 .orElse(0.0);
 
     }
+    public List<Student> getFirstSixStudents() {
+        return repository.findAll().stream().limit(6).toList();
+    }
+    public synchronized void printStudentName(String name) {
+        logger.info(name);
+    }
+
+    public void printStudentNamesInParallel() {
+        List<Student> students = getFirstSixStudents();
+
+        if (students.size() < 6) {
+            logger.info("Недостаточно студентов для выполнения задачи.");
+            return;
+        }
+
+        printStudentName("Main thread: " + students.get(0).getName());
+        printStudentName("Main thread: " + students.get(1).getName());
+
+        new Thread(() -> {
+            printStudentName("Thread 1: " + students.get(2).getName());
+            printStudentName("Thread 1: " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printStudentName("Thread 2: " + students.get(4).getName());
+            printStudentName("Thread 2: " + students.get(5).getName());
+        }).start();
+    }
+
+    public void printStudentNamesSynchronized() {
+        List<Student> students = getFirstSixStudents();
+
+        if (students.size() < 6) {
+            logger.info("Недостаточно студентов для выполнения задачи.");
+            return;
+        }
+
+        printStudentName("Main thread: " + students.get(0).getName());
+        printStudentName("Main thread: " + students.get(1).getName());
+
+        new Thread(() -> {
+            printStudentName("Thread 1: " + students.get(2).getName());
+            printStudentName("Thread 1: " + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printStudentName("Thread 2: " + students.get(4).getName());
+            printStudentName("Thread 2: " + students.get(5).getName());
+        }).start();
+    }
+
 }
 
