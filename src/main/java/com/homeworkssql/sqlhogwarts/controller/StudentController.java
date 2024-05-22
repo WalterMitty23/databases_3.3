@@ -6,6 +6,7 @@ import com.homeworkssql.sqlhogwarts.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -66,6 +67,17 @@ public class StudentController {
     @GetMapping("/lastFive")
     public Collection<Student> getLastFiveStudents() {
         return service.getLastFiveStudents();
+    }
+
+
+    @GetMapping("/names-starting-with-a")
+    public List<String> getNamesStartingWithA() {
+        return service.getNamesStartingWithA();
+    }
+
+    @GetMapping("/average-age")
+    public double getAverageAgeOfAllStudents() {
+        return service.getAverageAgeOfAllStudents();
     }
 
 }
